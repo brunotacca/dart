@@ -6,7 +6,7 @@
     "configurations": [
         {
             "name": "Dart",
-            "program": "intro/main.dart",
+            "program": "oop/Project01_Geometric_Forms/main.dart",
             "request": "launch",
             "type": "dart"
         }

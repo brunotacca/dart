@@ -21,7 +21,7 @@ Use a dot (.) to refer to an instance variable or method:
 
 // Invoke distanceTo() on p.
   num distance = p.distanceTo(Point(4, 4));
-
+  print(distance);
 /*
 Use ?. instead of . to avoid an exception when the leftmost operand is null:
 */
@@ -34,18 +34,21 @@ You can create an object using a constructor. Constructor names can be either Cl
 */
   var p1 = Point(2, 2);
   var p2 = Point.fromJson({'x': 1, 'y': 2});
+  print(p1.toString() + ' ' + p2.toString());
 
 /*
 The following code has the same effect, but uses the optional new keyword before the constructor name:
 */
   var p11 = new Point(2, 2);
   var p21 = new Point.fromJson({'x': 1, 'y': 2});
+  print(p11.toString() + ' ' + p21.toString());
 
 /*
 Some classes provide constant constructors. To create a compile-time constant using a constant constructor, put the const keyword before the constructor name:
 */
 
   var pp = const ImmutablePoint(2, 2);
+  print(pp.toString());
 
 /*
 Constructing two identical compile-time constants results in a single, canonical instance:
@@ -64,6 +67,8 @@ Within a constant context, you can omit the const before a constructor or litera
     'line': const [const ImmutablePoint(1, 10), const ImmutablePoint(-2, 11)],
   };
 
+  print(pointAndLine);
+
 /*
 You can omit all but the first use of the const keyword:
 */
@@ -72,6 +77,8 @@ You can omit all but the first use of the const keyword:
     'point': [ImmutablePoint(0, 0)],
     'line': [ImmutablePoint(1, 10), ImmutablePoint(-2, 11)],
   };
+
+  print(pointAndLine2);
 
 /*
 If a constant constructor is outside of a constant context and is invoked without const, it creates a non-constant object:
@@ -218,7 +225,8 @@ main3() {
     // Type check
     emp.firstName = 'Bob';
   }
-  (emp as Person).firstName = 'Bob';
+  // (emp as Person).firstName = 'Bob'; // Unnecessary cast
+  emp.firstName = 'Bob';
 }
 /*
 Because the arguments to the superclass constructor are evaluated before invoking the constructor, an argument can be an expression such as a function call:
@@ -235,6 +243,7 @@ class Employee2 extends Person {
 
 main4() {
   var emp = new Employee2();
+  print(emp);
 }
 
 /*

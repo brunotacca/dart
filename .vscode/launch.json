@@ -6,7 +6,7 @@
     "configurations": [
         {
             "name": "Dart",
-            "program": "oop_dart_docs/main.dart",
+            "program": "error_handling/main.dart",
             "request": "launch",
             "type": "dart"
         }

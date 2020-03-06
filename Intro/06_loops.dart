@@ -27,4 +27,9 @@ void main() {
 
   Set<String> set = Set.from(list);
   set.forEach((element) => print(element));
+  set.forEach(forEachPrintFunction);
+}
+
+void forEachPrintFunction(e) {
+  print(e);
 }

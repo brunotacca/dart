@@ -27,6 +27,9 @@ void main() {
         break;
     }
   });
+
+  print('End of main()');
+
 }
 
 // this method returns a `Future` object because it is marked with `async` keyword
@@ -39,9 +42,9 @@ Future<int> getUsers() async {
 
     // this `Future` object is rejected when network request fails to retrieve data
     // if this `Future` object is rejected, an exception will be thrown
-    final response = await http.get('https://reqres.in/api/users/26');
+    final response = await Future.delayed(Duration(seconds: 3), () => http.get('https://reqres.in/api/users/26'));
       
-    print('End of getUsers()');
+    print('End of getUsers() async');
     return response.statusCode; // returns `int` value
   } catch (e) {
     // this block is executed when an exception is thrown in `try` block

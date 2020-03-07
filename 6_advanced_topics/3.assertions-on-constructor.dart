@@ -48,4 +48,7 @@ void main() {
   Person p = Person( id: 1 ); // or `Person.create( id: 1 );`
   print( 'p: $p' );
 
+  // dart --enable-asserts 
+  // output: Failed assertion: line 24 pos 78: 'name != null': Argument `name` should not be `null`.
+
 }

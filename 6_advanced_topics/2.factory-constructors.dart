@@ -68,4 +68,7 @@ void main() {
   Person p3 = Person( 2, 'Mike' );
   print( 'p3 : $p3' );
 
+  print('----------------- Values:');
+  Person._cache.forEach( (k,v) => print(v));
+
 }

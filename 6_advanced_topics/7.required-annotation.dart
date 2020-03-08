@@ -25,6 +25,9 @@ class Person{
 
 void main() {
 
+  // Prints John null; Shows a warning, but compiles.
+  // Person p = Person( firstName: 'John' );
+
   // create Person object with required named arguments
   Person p = Person( firstName: 'John', lastName: 'Doe' );
 

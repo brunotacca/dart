@@ -3,9 +3,6 @@ name: dart_mysql
 environment:
   sdk: '>=2.7.0 <3.0.0'
 
-#dependencies:
-#  path: ^1.6.0
-
-dev_dependencies:
+dependencies:
   mysql1: ^0.17.1
   args: ^1.5.3

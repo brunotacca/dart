@@ -54,6 +54,22 @@ main() {
   print(n4 ??= 100); // default-assign 100 if n4 is null.
   print(n4);
 
+  // if null operator. `expr1 ?? expr2` evaluates to `expr1` if not `null`, otherwise `expr2`.
+  print(null ?? 'New in Dart 1.12');
+
+  // null-aware assignment
+  // null-aware assignment. `v ??= expr` causes `v` to be assigned `expr` only if `v` is `null`.
+  var x = null;
+  x ??= 'are the null-aware operators, friendly to';
+  print(x);
+
+  // null-aware access. `x?.p` evaluates to `x.p` if `x` is not `null`, otherwise evaluates to `null`.
+
+  // null-aware method invocation
+  // null-aware method invocation. `x?.m()` invokes `m` only if `x` is not `null`.
+  var isNull = null;
+  print(isNull?.foo()); // null (does not throw exception)
+
 }
 
 class Num {

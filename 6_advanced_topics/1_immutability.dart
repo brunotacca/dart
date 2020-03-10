@@ -11,28 +11,26 @@ import 'package:meta/meta.dart';
  * are also immutable. Therefore, all instance variables on these classes should be `final`.
  */
 @immutable
-class User{
+class User {
   final String name;
-  
+
   // an immutable class must use initializer (shorthand) syntax for the constructor
-  User( this.name );
+  User(this.name);
 
   // constructor can have optional body, but instance variables can not be reassigned
-  User.withLog( this.name ) {
-    print( 'User created with name: ${ this.name }' );
+  User.withLog(this.name) {
+    print('User created with name: ${this.name}');
   }
-
 }
 
 // execute program
 void main() {
-
   // create a `User` object
-  var u = User.withLog( 'John Doe' );
-  
+  var u = User.withLog('John Doe');
+
   // override name property
   //u.name = 'Mike'; // not allowed because `User` is `immutable`.
-  
+
   // print name property
-  print( u.name );
+  print(u.name);
 }

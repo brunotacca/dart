@@ -1,0 +1,14 @@
+{
+  "configVersion": 2,
+  "packages": [
+    {
+      "name": "dart_web",
+      "rootUri": "../",
+      "packageUri": "lib/",
+      "languageVersion": "2.7"
+    }
+  ],
+  "generated": "2020-03-11T23:15:21.436198Z",
+  "generator": "pub",
+  "generatorVersion": "2.7.1"
+}

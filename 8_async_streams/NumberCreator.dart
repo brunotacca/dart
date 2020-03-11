@@ -3,8 +3,10 @@ import 'dart:async';
 class NumberCreator {
   NumberCreator(max) {
     Timer.periodic(Duration(seconds: 1), (t) {
-      _controller.sink.add(_count);
-      _count++;
+      if (!_controller.isClosed) {
+        _controller.sink.add(_count);
+        _count++;
+      }
       if (_count == max) _controller.close();
     });
   }

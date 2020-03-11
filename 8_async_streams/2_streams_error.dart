@@ -10,7 +10,7 @@ Future<int> sumStream(Stream<int> stream) async {
   try {
     await for (var value in stream) {
       sum += value;
-    }
+    } 
   } catch (e) {
     print(e);
     return -1;

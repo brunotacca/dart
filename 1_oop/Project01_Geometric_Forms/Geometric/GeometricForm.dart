@@ -1,5 +1,5 @@
 abstract class GeometricForm {
-  String anyString;
+  String anyString = "Form";
   num area();
 
   String get type => this.anyString;

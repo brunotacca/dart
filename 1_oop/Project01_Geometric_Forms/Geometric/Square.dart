@@ -1,7 +1,7 @@
 import 'GeometricForm.dart';
 
 class Square extends GeometricForm {
-  num width, height;
+  num width = 0, height = 0;
 
   Square(num side) {
     this.width = side;

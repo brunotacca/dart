@@ -23,7 +23,7 @@ class Retangle implements GeometricForm {
 }
 
 class Square extends GeometricForm {
-  num width, height;
+  num width = 0, height = 0;
 
   Square(num dimension) {
     this.width = dimension;

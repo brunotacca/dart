@@ -1,5 +1,4 @@
 void main() {
-
   PrintItems<double> d = PrintItems(6, 10.2);
   d.printItem();
 
@@ -23,7 +22,7 @@ class PrintItems<T extends num> {
   PrintItems(this.times, this.printedItem);
 
   void printItem() {
-    for(int i=0; i<times; i++) {
+    for (int i = 0; i < times; i++) {
       print(printedItem);
     }
   }
@@ -39,5 +38,5 @@ T genericReturn<T, S>(T a, S b) {
 }
 
 S genericNumReturn<T extends num, S extends num>(T a, S b) {
-  return a + b;
+  return (a + b) as S;
 }

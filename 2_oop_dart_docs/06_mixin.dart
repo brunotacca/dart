@@ -72,7 +72,7 @@ mixin Demented {
 }
 
 class Person {
-  String name;
+  String? name;
 }
 
 class Performer {}

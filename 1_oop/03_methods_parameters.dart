@@ -1,6 +1,6 @@
 class Greet {
-  String msg;
-  void sayHello(String name, {int age: 0, String surname}) {
+  String msg = "";
+  void sayHello(String name, {int age: 0, String? surname}) {
     msg = 'Hello ' + name;
 
     if (surname != null) {
@@ -14,7 +14,7 @@ class Greet {
     print(msg);
   }
 
-  void sayBonjour(String name, [String surname, int age = 0]) {
+  void sayBonjour(String name, [String? surname, int age = 0]) {
     msg = 'Bonjour ' + name;
 
     if (surname != null) {

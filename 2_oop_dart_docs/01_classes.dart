@@ -121,8 +121,8 @@ class Point {
 */
 
 class Point2 {
-  num x;
-  num y;
+  num? x;
+  num? y;
 }
 
 void main2() {
@@ -200,7 +200,7 @@ In the following example, the constructor for the Employee class calls the named
 */
 
 class Person {
-  String firstName;
+  String? firstName;
 
   Person.fromJson(Map data) {
     print('in Person');
@@ -415,7 +415,7 @@ void main7() {
 // With getters and setters, you can start with instance variables, later wrapping them with methods, all without changing client code.
 
 class Point {
-  num x, y;
+  num x = 0, y = 0;
 
   Point(this.x, this.y);
 
@@ -426,8 +426,8 @@ class Point {
   }
 
   Point.fromJson(Map<String, num> json)
-      : x = json['x'],
-        y = json['y'] {
+      : x = json['x']!,
+        y = json['y']! {
     print('In Point.fromJson(): ($x, $y)');
   }
 

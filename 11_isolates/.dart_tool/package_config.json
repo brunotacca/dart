@@ -1,0 +1,14 @@
+{
+  "configVersion": 2,
+  "packages": [
+    {
+      "name": "dart_isolares",
+      "rootUri": "../",
+      "packageUri": "lib/",
+      "languageVersion": "2.12"
+    }
+  ],
+  "generated": "2021-07-31T20:50:01.584977Z",
+  "generator": "pub",
+  "generatorVersion": "2.13.3"
+}

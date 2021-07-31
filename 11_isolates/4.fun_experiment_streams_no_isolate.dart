@@ -22,7 +22,7 @@ void main() async {
   MethodA a = MethodA();
   MethodB b = MethodB();
 
-  final myMethodStream = ComputeWithMethodStream(a, queue).stream;
+  final myMethodStream = ComputeWithMethodStream(b, queue).stream;
   final methodStreamSubscription = myMethodStream.listen((event) {
     print("RESULT: " + event);
   }).onDone(() {
@@ -47,11 +47,14 @@ class NumberCreator {
 }
 
 class ComputeWithMethodStream {
+  bool _awaitingComputation = false;
   ComputeWithMethodStream(Method method, Queue<int> dataQueue) {
-    Timer.periodic(Duration(milliseconds: 1), (t) async {
-      if (dataQueue.isNotEmpty) {
+    Timer.periodic(Duration(milliseconds: 10), (t) async {
+      if (dataQueue.isNotEmpty && !_awaitingComputation) {
         int data = dataQueue.removeFirst();
+        _awaitingComputation = true;
         String result = await method.call(data.toString());
+        _awaitingComputation = false;
         if (!_controller.isClosed) {
           _controller.sink.add(result);
         }
@@ -78,7 +81,7 @@ class MethodA implements Method {
 class MethodB implements Method {
   @override
   Future<String> call(String msg) async {
-    await Future.delayed(Duration(milliseconds: 120));
+    await Future.delayed(Duration(milliseconds: rng.nextInt(500)));
     return msg + "B";
   }
 }

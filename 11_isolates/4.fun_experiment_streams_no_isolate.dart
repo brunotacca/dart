@@ -47,14 +47,11 @@ class NumberCreator {
 }
 
 class ComputeWithMethodStream {
-  bool _awaitingComputation = false;
   ComputeWithMethodStream(Method method, Queue<int> dataQueue) {
     Timer.periodic(Duration(milliseconds: 1), (t) async {
-      if (dataQueue.isNotEmpty /*&& !_awaitingComputation*/) {
+      if (dataQueue.isNotEmpty) {
         int data = dataQueue.removeFirst();
-        _awaitingComputation = true;
         String result = await method.call(data.toString());
-        _awaitingComputation = false;
         if (!_controller.isClosed) {
           _controller.sink.add(result);
         }

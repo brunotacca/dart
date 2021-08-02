@@ -23,10 +23,32 @@ void main() async {
   MethodB b = MethodB();
 
   final myMethodStream = ComputeWithMethodStream(b, queue).stream;
-  final methodStreamSubscription = myMethodStream.listen((event) {
-    print("RESULT: " + event);
-  }).onDone(() {
+  StreamSubscription<String> methodStreamSubscription;
+
+  methodStreamSubscription = myMethodStream.listen(null);
+  methodStreamSubscription.onData((data) {
+    print("RESULT: " + data);
+  });
+  methodStreamSubscription.onDone(() {
     print("STREAM ComputeWithMethodStream DONE");
+  });
+  methodStreamSubscription.onError((e) {
+    print("STREAM ComputeWithMethodStream DONE $e");
+  });
+
+  Future.delayed(Duration(seconds: 3), () {
+    print("PAUSING");
+    methodStreamSubscription.pause();
+  });
+
+  Future.delayed(Duration(seconds: 6), () {
+    print("RESUMING");
+    methodStreamSubscription.resume();
+  });
+
+  Future.delayed(Duration(seconds: 8), () {
+    print("CANCELLING");
+    methodStreamSubscription.cancel();
   });
 }
 
@@ -48,22 +70,60 @@ class NumberCreator {
 
 class ComputeWithMethodStream {
   bool _awaitingComputation = false;
+  late StreamController<String> _controller;
+  Stream<String> get stream => _controller.stream;
+  late Method _method;
+  late Queue<int> _queue;
+  late Timer? _timer;
+
   ComputeWithMethodStream(Method method, Queue<int> dataQueue) {
-    Timer.periodic(Duration(milliseconds: 10), (t) async {
-      if (dataQueue.isNotEmpty && !_awaitingComputation) {
-        int data = dataQueue.removeFirst();
-        _awaitingComputation = true;
-        String result = await method.call(data.toString());
-        _awaitingComputation = false;
-        if (!_controller.isClosed) {
-          _controller.sink.add(result);
-        }
-      }
-    });
+    _method = method;
+    _queue = dataQueue;
+
+    _controller = StreamController<String>(
+        onListen: _onListen,
+        onPause: _onPause,
+        onResume: _onResume,
+        onCancel: _onCancel);
   }
 
-  final _controller = StreamController<String>();
-  Stream<String> get stream => _controller.stream;
+  void tick(_) async {
+    if (_queue.isNotEmpty && !_awaitingComputation) {
+      int data = _queue.removeFirst();
+      _awaitingComputation = true;
+      String result = await _method.call(data.toString());
+      _awaitingComputation = false;
+      if (!_controller.isClosed) {
+        _controller.add(result);
+      }
+    }
+  }
+
+  void _onListen() {
+    _startTimer();
+  }
+
+  void _onPause() {
+    _stopTimer();
+  }
+
+  void _onResume() {
+    _startTimer();
+  }
+
+  void _onCancel() {
+    _stopTimer();
+    _controller.close();
+  }
+
+  void _startTimer() {
+    _timer = Timer.periodic(Duration(milliseconds: 10), tick);
+  }
+
+  void _stopTimer() {
+    _timer?.cancel();
+    _timer = null;
+  }
 }
 
 abstract class Method {

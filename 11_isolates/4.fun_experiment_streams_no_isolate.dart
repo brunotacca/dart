@@ -77,6 +77,7 @@ class ComputeWithMethodStream {
   late Timer? _timer;
 
   ComputeWithMethodStream(Method method, Queue<int> dataQueue) {
+    print("CONSTRUCTOR");
     _method = method;
     _queue = dataQueue;
 
@@ -88,6 +89,7 @@ class ComputeWithMethodStream {
   }
 
   void tick(_) async {
+    print("TICK");
     if (_queue.isNotEmpty && !_awaitingComputation) {
       int data = _queue.removeFirst();
       _awaitingComputation = true;
